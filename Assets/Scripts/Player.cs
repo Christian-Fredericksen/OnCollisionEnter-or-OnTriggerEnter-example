@@ -4,26 +4,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter(Collision other)
     {
+        // if the Player collides with the Obstacle
+        // change the color of the Obstacle.
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-    
-    private void OnCollisionEnter(Collision collision)
-        
-    {
-        if (collision.transform.tag == "Obsticle")
+        if (other.transform.tag == "Obstacle")
         {
-            collision.transform.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
-            transform.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
+            other.transform.GetComponent<Renderer>().material.color = Random.ColorHSV();
+        }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "Pellet")
+        {
+            Destroy(other.gameObject);
         }
     }
-
 }
